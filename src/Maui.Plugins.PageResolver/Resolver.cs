@@ -28,6 +28,18 @@ public static partial class Resolver
         }
     }
 
+    public static void AddViewModelLookup<T1, T2>()
+    {
+        ViewModelLookup.Add(typeof(T1), typeof(T2));
+    }
+    public static void AddViewModelLookup(Dictionary<Type, Type> ViewModelMappings)
+    {
+        foreach (var mapping in ViewModelMappings)
+        {
+            ViewModelLookup.Add(mapping.Key, mapping.Value);
+        }
+    }
+
     internal static void InitialiseViewModelLookup(Dictionary<Type, Type> ViewModelMappings)
     {
         ViewModelLookup.Clear();
@@ -60,7 +72,7 @@ public static partial class Resolver
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    internal static T Resolve<T>() where T : class
+    public static T Resolve<T>() where T : class
     {
         var result = scope.ServiceProvider.GetRequiredService<T>();
 

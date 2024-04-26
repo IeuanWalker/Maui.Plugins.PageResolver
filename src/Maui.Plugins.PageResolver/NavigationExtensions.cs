@@ -68,7 +68,7 @@ public static class NavigationExtensions
     }
 
 
-    private static Page ResolvePage<T>(params object[] parameters) where T : Page
+    public static Page ResolvePage<T>(params object[] parameters) where T : Page
     {
         var serviceProvider = Resolver.GetServiceProvider();
 
